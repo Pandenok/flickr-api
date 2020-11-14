@@ -1,0 +1,12 @@
+<%= form_with(url: "/", method: 'get', local: true) do %>
+  <%= label_tag "User ID:" %>
+  <%= text_field_tag :user_id %>
+
+  <%= submit_tag 'Search' %>
+<% end %>
+
+<% unless @photos.nil? %>
+  <% @photos.each do |photo| %>
+    <img src="<%= Flickr.url_t(photo) %>"/>
+  <% end %>
+<% end %>
