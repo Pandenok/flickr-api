@@ -1,12 +1,27 @@
-<%= form_with(url: "/", method: 'get', local: true) do %>
-  <%= label_tag "User ID:" %>
-  <%= text_field_tag :user_id %>
-
-  <%= submit_tag 'Search' %>
-<% end %>
-
-<% unless @photos.nil? %>
-  <% @photos.each do |photo| %>
-    <img src="<%= Flickr.url_t(photo) %>"/>
-  <% end %>
+<% if params[:user_id].nil? %>
+  <div class="jumbotron min-vh-100 text-center m-0 d-flex flex-column justify-content-center">
+    <div class="d-flex align-items-center flex-column">
+      <%= render 'search_form' %>
+    </div>
+  </div>
+<% else %>
+  <div class="jumbotron text-center">
+    <div class="d-flex align-items-center flex-column">
+      <%= render 'search_form' %>
+    </div>
+    <% if params[:user_id].empty? %>
+      <div>Flickr API Searcher is displaying latest public photos uploaded to Flickr</div>
+    <% else %>
+      <div>Flickr API Searcher is displaying public photos uploaded by User <%= params[:user_id] %> </div>
+    <% end %>
+  </div>
+  <div class="container-fluid">
+    <div class="row justify-content-md-center">
+    <% @photos.each do |photo| %>
+      <div class="col-md-auto">
+        <img src="<%= Flickr.url_m(photo) %>"/>
+      </div>
+    <% end %>
+    </div>
+  </div>
 <% end %>
