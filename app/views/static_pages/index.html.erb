@@ -12,14 +12,14 @@
     <% if params[:user_id].empty? %>
       <div>Flickr API Searcher is displaying latest public photos uploaded to Flickr</div>
     <% else %>
-      <div>Flickr API Searcher is displaying public photos uploaded by User <%= params[:user_id] %> </div>
+      <div>Flickr API Searcher is displaying public photos uploaded by <%= params[:user_id] %> </div>
     <% end %>
   </div>
   <div class="container-fluid">
     <div class="row justify-content-md-center">
     <% @photos.each do |photo| %>
       <div class="col-md-auto">
-        <img src="<%= Flickr.url_m(photo) %>"/>
+        <img src="<%= Flickr.url_n(photo) %>"/>
       </div>
     <% end %>
     </div>
